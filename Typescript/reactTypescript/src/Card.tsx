@@ -1,12 +1,8 @@
-type CardProps = {
-  style: React.CSSProperties;
-};
-
-const Card = ({ style }: CardProps) => {
+const Card = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       Card
-      {style.height}
+      {children}
     </div>
   );
 };
