@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "./App.css";
+import Button from "./Button";
 
 function App() {
   useEffect(() => {
@@ -10,7 +11,11 @@ function App() {
     console.log(themeMode);
   }, []);
 
-  return <>Hello world</>;
+  return (
+    <Button value={5} valueList={[1, 2, 3, 4]}>
+      Bhn
+    </Button>
+  );
 }
 
 export default App;
