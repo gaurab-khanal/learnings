@@ -1,9 +1,9 @@
-const Button = () => {
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    console.log(e);
-  };
+import { useRef } from "react";
 
-  return <button onClick={handleClick}>+</button>;
+const Button = () => {
+  const ref = useRef<HTMLButtonElement>(null);
+
+  return <button ref={ref}>+</button>;
 };
 
 export default Button;
