@@ -1,15 +1,12 @@
-type cardProps = {
-  backgroundColor: string;
-  size: string;
-  fnc: () => string;
+type CardProps = {
+  style: React.CSSProperties;
 };
 
-const Card = ({ backgroundColor, size, fnc }: cardProps) => {
+const Card = ({ style }: CardProps) => {
   return (
     <div>
       Card
-      {backgroundColor}
-      {size}
+      {style.height}
     </div>
   );
 };

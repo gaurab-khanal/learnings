@@ -1,17 +1,15 @@
 import "./App.css";
 import Card from "./Card";
 
-function App() {\
-
-
-  const fnc = ()=>{
-    return "hello"
-  }
+function App() {
+  const fnc = () => {
+    return "hello";
+  };
 
   return (
     <>
       Hello world
-      <Card backgroundColor="blue" size="200px"  fnc={fnc}/>
+      <Card style={{ height: "200px", backgroundColor: "red" }} />
     </>
   );
 }
