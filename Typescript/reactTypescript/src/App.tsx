@@ -1,13 +1,16 @@
+import { useEffect } from "react";
 import "./App.css";
-import Button from "./Button";
 
 function App() {
-  return (
-    <>
-      Hello world {count}
-      <Button type="submit" />
-    </>
-  );
+  useEffect(() => {
+    type theme = "dark" | "light";
+
+    const themeMode = localStorage.getItem("theme") as theme;
+
+    console.log(themeMode);
+  }, []);
+
+  return <>Hello world</>;
 }
 
 export default App;
