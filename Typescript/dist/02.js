@@ -1,4 +1,3 @@
-"use strict";
 // Enums, Generics, Utility, Types, Classes
 // Enums are like array where constant values are stored in form of object
 var LogType;
