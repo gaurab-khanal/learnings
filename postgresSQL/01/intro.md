@@ -4,6 +4,7 @@
 
 ## Create Table
     CREATE TABLE cars (
+        id SERIAL PRIMARY KEY, // SERIAL means autoincreate id
         brand VARCHAR(255),
         model VARCHAR(255),
         year INT
