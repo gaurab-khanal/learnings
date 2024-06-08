@@ -25,7 +25,7 @@ const createAddressTable = async () => {
         const res = await client.query(`
         CREATE TABLE address (
             id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
+    user_id INTEGER UNIQUE NOT NULL,
     city VARCHAR(100) NOT NULL,
     country VARCHAR(100) NOT NULL,
     street VARCHAR(255) NOT NULL,
@@ -112,10 +112,27 @@ const insertAddress = async (user_id: number, city: string, country: string, str
 }
 
 
-deleteUserById(2)
+const getUserAndAddressWithJoin = async (id: number)=>{
+    try {
+        const values = [id];
+        const query = `
+        SELECT users.id, users.username, users.email, address.city, address.country
+        FROM users
+        JOIN address ON users.id = address.user_id
+        WHERE users.id = $1;
+        `
+        const res = await client.query(query, values);
+        console.log(res.rows);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+// deleteUserById(2)
 // updateUser("gaurav", "khanal@gmail.com", 1);
-// insertData("gaura", "gaurb@gmail.com", "123456");
+// insertData("khanal", "gaurab@mail.com", "1234596");
 // fetchUserByEmail("gaurb@gmail.com")
 
-// insertAddress(2, "Kathmandu", "Nepal", "Boudha", "44600");
+// insertAddress(6, "Kathmandu", "Nepal", "Boudha", "44600");
 // createAddressTable();
+getUserAndAddressWithJoin(6);
