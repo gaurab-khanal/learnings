@@ -13,6 +13,7 @@ const withDimension = (Element) => {
         setHeight(compRef.current.offsetHeight);
       }
     }, [compRef]);
+    
     return <Element {...props} ref={compRef} width={width} height={height} />;
   };
   return WithDimension; 
