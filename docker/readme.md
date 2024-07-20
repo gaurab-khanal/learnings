@@ -85,3 +85,85 @@ To solve this problem Virtual machines were developed.
  - Running instance of image is known as containers.
  - Image can be shared with other.
  - Other can download and run image then it becomes containers.
+
+
+# Docker commands
+
+### Download and run docker image to create container.
+```
+docker run hello-world
+```
+
+### Download and run image to create container in interactive environment(dont exit out of it)
+```
+docker run -it ubuntu
+```
+
+### Show all running containers
+```
+docker ps
+```
+### Downloading Images
+```
+docker pull mongo
+```
+### Downloading specific version of image
+```
+docker pull mongo:2.3
+```
+### Show all images
+```
+docker images
+```
+### Delete image
+```
+docker rmi mongo
+```
+
+### Run same container in multiple terminal
+```
+docker container exec -it <container-tag> bash
+```
+
+### Stop container
+```
+docker stop <container-id>
+```
+
+### Show all stopped container 
+```
+docker ps -a
+```
+
+### Gell all info about running container
+```
+docker inspect <container-id>
+```
+
+### logs of docker container
+```
+docker logs <container-id>
+```
+### Delete all containers
+```
+docker container prune -f
+```
+- -f means delete without confirmation
+- prune means delete all the stopped containers
+
+### Delete one stopped container
+```
+docker rm <container-id>
+```
+
+### Sometimes you need container to run for long time in background like servers then 
+```
+docker run -d <container-name>
+```
+
+### Accessing running container on host machine with port
+
+## How image runs to become container?
+- Every app need OS to run.
+- In docker also it is same.
+- Every image contains an OS, its a minimal version tailored for containerized environment.
