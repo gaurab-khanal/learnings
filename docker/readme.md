@@ -57,113 +57,181 @@ To solve this problem Virtual machines were developed.
 - Container itself is an isolated environment.
 
 ## Docker Parts
+
 - Docker Runtime
-    - Helps to start and stop containers.
-    - Types 
-        - runc -> Work with OS to start and stop the containers.
-        - containerd (CNCF project) -> high level container runtime and manages runc as well container. Focuses more on networking(pulling images, exposing port with host OS).
+
+  - Helps to start and stop containers.
+  - Types
+    - runc -> Work with OS to start and stop the containers.
+    - containerd (CNCF project) -> high level container runtime and manages runc as well container. Focuses more on networking(pulling images, exposing port with host OS). 
 
 - Docker Engine
-    - Used to interact with Docker.
-    - Parts: 
-        - Docker Daemon -> Runs on Host machine as a background process, listens for docker API request, process them and manages containetes based on request. 
-            
-            - Steps: Docker CLI -> Rest API -> Docker Server -> Docker daemon -> Container Runtime -> Manages Containers based on request from Docker CLI. 
+
+  - Used to interact with Docker.
+  - Parts:
+    - Docker Daemon -> Runs on Host machine as a background process, listens for docker API request, process them and manages containetes based on request.
+      - Steps: Docker CLI -> Rest API -> Docker Server -> Docker daemon -> Container Runtime -> Manages Containers based on request from Docker CLI.
 
 - Orchestration
-    - Automated management of containerized applications.
-    - Includes deploying, scaling, networking, and monitoring containers.
-    - If Docker is running more than one container of v1 app then
+  - Automated management of containerized applications.
+  - Includes deploying, scaling, networking, and monitoring containers.
+  - If Docker is running more than one container of v1 app then
     after a while you want to update all container to v2 app.
-    - Stop one and update then go for other. This is done manually.
-    - This can be automated by Orchestration.
-    - Docker swarm, Kubernetes can be used to do so.
+  - Stop one and update then go for other. This is done manually.
+  - This can be automated by Orchestration.
+  - Docker swarm, Kubernetes can be used to do so.
 
 ## Docker Image
- - Executable software package that includes everything needed to run a piece of software, including the code, runtime, libraries, environment variables and configuration files.
- - Image can be created using docker file.
- - Running instance of image is known as containers.
- - Image can be shared with other.
- - Other can download and run image then it becomes containers.
 
+- Executable software package that includes everything needed to run a piece of software, including the code, runtime, libraries, environment variables and configuration files.
+- Image can be created using docker file.
+- Running instance of image is known as containers.
+- Image can be shared with other.
+- Other can download and run image then it becomes containers.
 
 # Docker commands
 
 ### Download and run docker image to create container.
+
 ```
 docker run hello-world
 ```
 
 ### Download and run image to create container in interactive environment(dont exit out of it)
+
 ```
 docker run -it ubuntu
 ```
 
 ### Show all running containers
+
 ```
 docker ps
 ```
+
 ### Downloading Images
+
 ```
 docker pull mongo
 ```
+
 ### Downloading specific version of image
+
 ```
 docker pull mongo:2.3
 ```
+
 ### Show all images
+
 ```
 docker images
 ```
+
 ### Delete image
+
 ```
 docker rmi mongo
 ```
 
+### get all images id only
+
+```
+docker images -q
+```
+
+### Delete all images
+
+```
+docker rmi $(docker images -q)
+```
+
 ### Run same container in multiple terminal
+
 ```
 docker container exec -it <container-tag> bash
 ```
 
 ### Stop container
+
 ```
 docker stop <container-id>
 ```
 
-### Show all stopped container 
+### Show all stopped container
+
 ```
 docker ps -a
 ```
 
 ### Gell all info about running container
+
 ```
 docker inspect <container-id>
 ```
 
 ### logs of docker container
+
 ```
 docker logs <container-id>
 ```
+
 ### Delete all containers
+
 ```
 docker container prune -f
 ```
+
 - -f means delete without confirmation
 - prune means delete all the stopped containers
 
 ### Delete one stopped container
+
 ```
 docker rm <container-id>
 ```
 
-### Sometimes you need container to run for long time in background like servers then 
+### Sometimes you need container to run for long time in background like servers then
+
 ```
 docker run -d <container-name>
 ```
 
 ### Accessing running container on host machine with port
 
+```
+docker -d -p 8080:80 nginx
+```
+
+- 8080 is port of host OS which is mapped to port 80 of container
+- This is known as port forwarding
+
+### Docker commit
+
+```
+docker commit -m "Commit message" <container-id> custom_image_name:version
+```
+
+- can be helpful when you need to share custom image of image you have pulled and made some changes
+- version is optional
+
+### Docker file
+```
+From ubuntu
+RUN apt-get update
+CMD ["echo", "Hello World...!"]
+```
+### Build image
+```
+docker build -t custom_image_name <docker-file-directory>
+```
+
+## Layer
+
+- It is a file used by image.
+- Docker images are built on top of layer.
+
 ## How image runs to become container?
+
 - Every app need OS to run.
 - In docker also it is same.
 - Every image contains an OS, its a minimal version tailored for containerized environment.
